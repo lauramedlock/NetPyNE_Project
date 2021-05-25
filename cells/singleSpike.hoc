@@ -4,11 +4,9 @@ begintemplate AB
     public soma
     create soma
     
-
     proc init() {
 
         create soma
-        
 
         soma {
         nseg=1
