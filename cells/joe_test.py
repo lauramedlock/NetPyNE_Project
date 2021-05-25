@@ -3,14 +3,34 @@ netParams = specs.NetParams()
 
 
 
-# import the delayed spike model
-netParams.importCellParams(
-    label='delaySpike_hoc',
-    conds={'cellType':'E_delay', 'cellModel':'CF'},
-    fileName='delaySpike.hoc',
-    cellName='CF')
+# # import the delayed spike model
+# netParams.importCellParams(
+#     label='delaySpike_hoc',
+#     conds={'cellType':'E_delay', 'cellModel':'CF'},
+#     fileName='delaySpike.hoc',
+#     cellName='CF')
 
-netParams.popParams['E_delay'] = {'cellType':'E_delay', 'numCells': 1, 'cellModel':'CF'}
+
+netParams.cellParams['E_delay'] = {'secs': {'soma': {}}}
+netParams.cellParams['E_delay']['secs']['soma']['geom'] = {
+    'diam': 19.55,
+    'L'   : 19.55,
+    'Ra'  : 1000
+}
+netParams.cellParams['E_delay']['secs']['soma']['mechs'] = {
+    'leak':   {'g': 0.00002},
+    'kv1':    {'gkbar': 0.00006},
+    'kv2':    {'gkbar': 0.002},
+    'kv3':    {'gkbar': 0.00005},
+    'kv4':    {'gkbar': 0.011},
+    'nav1p1': {'gnabar': 0},
+    'nav1p6': {'gnabar': 0},
+    'nav1p7': {'gnabar': 0.03},
+    'nav1p8': {'gnabar': 0.04},
+}
+
+
+netParams.popParams['E_delay'] = {'cellType':'E_delay', 'numCells': 1}
 
 # Stim Source:
 netParams.stimSourceParams['Input_1'] = {
@@ -29,12 +49,12 @@ netParams.stimTargetParams['Input_1->E_delay'] = {
 
 
 ## cfg  
-cfg = specs.SimConfig()					            
-cfg.duration = 2*1e3 						            
-cfg.dt = 0.01							                
-#cfg.verbose = 1							                
+cfg = specs.SimConfig()                             
+cfg.duration = 2*1e3                                    
+cfg.dt = 0.01                                           
+#cfg.verbose = 1                                            
 cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}
-cfg.recordStep = 0.1 			
+cfg.recordStep = 0.1            
 cfg.filename = 'model_output'
 cfg.analysis['plotTraces'] = {'include': [0],'saveFig': True}
 
