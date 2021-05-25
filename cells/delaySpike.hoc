@@ -1,31 +1,36 @@
-create soma
-access soma
+//* template CF
+begintemplate CF
 
-soma nseg=1
-soma diam=19.55 // calculated from Cm=12pF with diam=L
-soma L=19.55  // calculated from Cm
-soma Ra=1000 
+    create soma
+    access soma
 
-soma insert leak
-soma insert kv1
-soma insert kv2
-soma insert kv3
-soma insert kv4
-soma insert nav1p1
-soma insert nav1p6
-soma insert nav1p7
-soma insert nav1p8
-ek = -88
-ena = 55
+        soma nseg=1
+        soma diam=19.55 // calculated from Cm=12pF with diam=L
+        soma L=19.55  // calculated from Cm
+        soma Ra=1000 
 
-finitialize(-80)
+        soma insert leak
+        soma insert kv1
+        soma insert kv2
+        soma insert kv3
+        soma insert kv4
+        soma insert nav1p1
+        soma insert nav1p6
+        soma insert nav1p7
+        soma insert nav1p8
+        ek = -88
+        ena = 55
 
-gnabar_nav1p1 = 0
-gnabar_nav1p6 = 0
-gnabar_nav1p7 = 0.03
-gnabar_nav1p8 = 0.04
-gkbar_kv1 = 0.00006
-gkbar_kv2 = 0.002
-gkbar_kv3 = 0.00005
-gkbar_kv4 = 0.011
-g_leak = 0.00002
+        finitialize(-80)
+
+        gnabar_nav1p1 = 0
+        gnabar_nav1p6 = 0
+        gnabar_nav1p7 = 0.03
+        gnabar_nav1p8 = 0.04
+        gkbar_kv1 = 0.00006
+        gkbar_kv2 = 0.002
+        gkbar_kv3 = 0.00005
+        gkbar_kv4 = 0.011
+        g_leak = 0.00002
+
+endtemplate CF
