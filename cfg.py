@@ -1,3 +1,6 @@
+'''
+This is the cfg.py file for the NetPyNE Project by L Medlock & M Mazar
+'''
 
 from netpyne import specs
 from neuron import h

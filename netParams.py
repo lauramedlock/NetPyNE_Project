@@ -1,11 +1,10 @@
 '''
-This is the netParams.py file for the NetPyeNE Project by L Medlock & M Mazar
+This is the netParams.py file for the NetPyNE Project by L Medlock & M Mazar
 '''
 
 from netpyne import specs, sim
 from neuron import h, gui
 from ais_variables import *
-from cells import *
 import matplotlib
 
 # Network parameters
