@@ -11,5 +11,5 @@ In bash terminal:
 1. cd to directory (../NetPyNE-Project/cells)
 2. compile .mods using nrnivmodl  
   
-In iPython terminal:
+In iPython terminal:  
 3. run init.py
