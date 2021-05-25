@@ -1,0 +1,259 @@
+/*
+5/17/2017  Revised by N.T. Carnevale for the sake of conceptual clarity
+and to facilitate attributed reuse.
+In this version, the reference temperature is 23 deg C
+and the value assigned to celsius is the actual operating temperature
+in degrees celsius.
+*/
+
+objectvar save_window_, rvp_
+objectvar scene_vector_[4]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin I/V Clamp Electrode
+{
+load_file("electrod.hoc")
+}
+
+{
+xpanel("NEURON Main Panel", 0)
+xcheckbox("Quiet",&stdrun_quiet,"")
+realtime = 6
+xvalue("Real Time","realtime", 0,"", 0, 1 )
+// celsius = 6.3
+celsius = 23 // actual operating temperature
+xvalue("celsius","celsius", 1,"", 0, 1 )
+global_ra = 80
+xvalue("Axial Resistivity","global_ra", 1,"set_ra()", 1, 1 )
+xbutton("RunControl","nrncontrolmenu()")
+xmenu("New Graph", 0)
+xbutton("Voltage axis","newPlotV()")
+xbutton("Current axis","newPlotI()")
+xbutton("State axis","newPlotS()")
+xbutton("Shape plot","newshapeplot()")
+xbutton("Vector movie","newvectorplot()")
+xbutton("Phase Plane","newphaseplane()")
+xbutton("Grapher","load_proc(\"makegrapher\") makegrapher()")
+xmenu()
+xmenu("Point Processes", 0)
+xmenu("Managers", 0)
+xbutton("Point Manager","load_template(\"PointProcessManager\") makeppm()")
+xbutton("Point Group","load_template(\"PointProcessGroupManager\") makeppgm()")
+xbutton("Electrode","load_proc(\"makeelectrode\") makeelectrode()")
+xmenu()
+xmenu("Viewers", 0)
+xmenu("PointProcesses", 0)
+xbutton("IClamp","makePointBrowser(\"IClamp\")")
+xbutton("AlphaSynapse","makePointBrowser(\"AlphaSynapse\")")
+xbutton("SEClamp","makePointBrowser(\"SEClamp\")")
+xbutton("VClamp","makePointBrowser(\"VClamp\")")
+xbutton("APCount","makePointBrowser(\"APCount\")")
+xmenu()
+xmenu()
+xmenu()
+xmenu("Distributed Mechanisms", 0)
+xmenu("Managers", 0)
+xbutton("Inserter","load_template(\"Inserter\") makeinserter()")
+xbutton("Homogeneous Spec","load_proc(\"makeshowmechanism\") makeshowmechanism()")
+xmenu()
+xmenu("Viewers", 0)
+xbutton("Shape Name","load_template(\"MenuExplore\") makeMenuExplore()")
+xbutton("Name Values","nrnallsectionmenu()")
+xmenu("Mechanisms (Globals)", 0)
+xbutton("na_ion","nrnglobalmechmenu(\"na_ion\")")
+xbutton("k_ion","nrnglobalmechmenu(\"k_ion\")")
+xbutton("hh","nrnglobalmechmenu(\"hh\")")
+xmenu()
+xmenu()
+xmenu()
+xmenu("Miscellaneous", 0)
+xmenu("Clipboard", 0)
+xbutton("Save to File","load_proc(\"clipboard_save\") clipboard_save()")
+xbutton("Retrieve from File","load_proc(\"clipboard_retrieve\") clipboard_retrieve()")
+xmenu()
+xbutton("Family","load_template(\"Family\") makeFamily()")
+xbutton("Parameterized Function","load_template(\"FunctionFitter\") makefitter()")
+xbutton("Run Fitter","load_template(\"RunFitter\") makerunfitter()")
+xmenu("Impedance", 0)
+xbutton("Frequency","load_template(\"ImpedanceRatio\") makeImpRatio()")
+xbutton("Path","load_template(\"Impx\") makeImpx()")
+xbutton("log(A) vs x","load_template(\"LogAvsX\") makelogax()")
+xbutton("Shape","load_template(\"ImpShape\") makeImpShape()")
+xmenu()
+xmenu()
+xpanel(3,318)
+}
+{
+xpanel("RunControl", 0)
+v_init = -70
+xvalue("Init","v_init", 1,"stdinit()", 1, 1 )
+xbutton("Init & Run","run()")
+xbutton("Stop","stoprun=1")
+runStopAt = 5
+xvalue("Continue til","runStopAt", 1,"{continuerun(runStopAt) stoprun=1}", 1, 1 )
+runStopIn = 1
+xvalue("Continue for","runStopIn", 1,"{continuerun(t + runStopIn) stoprun=1}", 1, 1 )
+xbutton("Single Step","steprun()")
+t = 700
+xvalue("t","t", 2 )
+tstop = 700
+xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
+dt = 0.05
+xvalue("dt","dt", 1,"setdt()", 0, 1 )
+steps_per_ms = 20
+xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
+xpanel(601,16)
+}
+{
+save_window_ = new Graph(0)
+save_window_.size(0,700,-90,50)
+scene_vector_[3] = save_window_
+{save_window_.view(0, -90, 700, 140, 158, 10, 318.75, 265)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addexpr("soma.v(0.5)", 1, 1, 0.46369, 0.933666, 2)
+}
+{
+xpanel("soma(0 - 1) (Parameters)", 0)
+xlabel("soma(0 - 1) (Parameters)")
+xlabel("nseg = 10")
+soma.L = 10
+xvalue("L","soma.L", 1,"define_shape()", 0, 0 )
+soma.cm = 1
+xvalue("cm","soma.cm", 1,"", 0, 0 )
+soma.diam = 10
+xvalue("diam","soma.diam", 1,"", 0, 0 )
+soma.gnabar_B_Na = 0.008
+xvalue("gnabar_B_Na","soma.gnabar_B_Na", 1,"", 0, 0 )
+soma.ena = 60
+xvalue("ena","soma.ena", 1,"", 0, 0 )
+soma.g_pas = 1.1e-05
+xvalue("g_pas","soma.g_pas", 1,"", 0, 0 )
+soma.e_pas = -70
+xvalue("e_pas","soma.e_pas", 1,"", 0, 0 )
+soma.gkbar_KDRI = 0.0043
+xvalue("gkbar_KDRI","soma.gkbar_KDRI", 1,"", 0, 0 )
+soma.ek = -84
+xvalue("ek","soma.ek", 1,"", 0, 0 )
+xpanel(303,567)
+}
+
+{
+xpanel("spacer(0 - 1) (Parameters)", 0)
+xlabel("spacer(0 - 1) (Parameters)")
+xlabel("nseg = 10")
+spacer.L = 5
+xvalue("L","spacer.L", 1,"define_shape()", 0, 0 )
+spacer.cm = 1
+xvalue("cm","spacer.cm", 1,"", 0, 0 )
+spacer.diam = 0.5
+xvalue("diam","spacer.diam", 1,"", 0, 0 )
+
+spacer.g_pas = 1.1e-05
+xvalue("g_pas","spacer.g_pas", 1,"", 0, 0 )
+spacer.e_pas = -70
+xvalue("e_pas","spacer.e_pas", 1,"", 0, 0 )
+xpanel(303,567)
+}
+
+
+{
+xpanel("AIS(0 - 1) (Parameters)", 0)
+xlabel("AIS(0 - 1) (Parameters)")
+xlabel("nseg = 10")
+AIS.L = 10
+xvalue("L","AIS.L", 1,"define_shape()", 0, 0 )
+AIS.cm = 1
+xvalue("cm","AIS.cm", 1,"", 0, 0 )
+AIS.diam = 0.5
+xvalue("diam","AIS.diam", 1,"", 0, 0 )
+AIS.gnabar_B_Na = 0.008
+xvalue("gnabar_B_Na","AIS.gnabar_B_Na", 1,"", 0, 0 )
+AIS.ena = 60
+xvalue("ena","AIS.ena", 1,"", 0, 0 )
+AIS.g_pas = 1.1e-05
+xvalue("g_pas","AIS.g_pas", 1,"", 0, 0 )
+AIS.e_pas = -70
+xvalue("e_pas","AIS.e_pas", 1,"", 0, 0 )
+AIS.gkbar_KDRI = 0.0043
+xvalue("gkbar_KDRI","AIS.gkbar_KDRI", 1,"", 0, 0 )
+AIS.ek = -84
+xvalue("ek","AIS.ek", 1,"", 0, 0 )
+xpanel(303,567)
+}
+
+
+{
+xpanel("dend[0](0 - 1) (Parameters)", 0)
+xlabel("dend[0](0 - 1) (Parameters)")
+xlabel("nseg = 50")
+dend[0].L = 1371
+xvalue("L","dend[0].L", 1,"define_shape()", 0, 0 )
+dend[0].cm = 1
+xvalue("cm","dend[0].cm", 1,"", 0, 0 )
+dend[0].diam = 1.4
+xvalue("diam","dend[0].diam", 1,"", 0, 0 )
+dend[0].gnabar_SS = 0
+xvalue("gnabar_SS","dend[0].gnabar_SS", 1,"", 0, 0 )
+dend[0].ena = 60
+xvalue("ena","dend[0].ena", 1,"", 0, 0 )
+dend[0].g_pas = 1.1e-05
+xvalue("g_pas","dend[0].g_pas", 1,"", 0, 0 )
+dend[0].e_pas = -70
+xvalue("e_pas","dend[0].e_pas", 1,"", 0, 0 )
+dend[0].gkbar_KDRI = 0.034
+xvalue("gkbar_KDRI","dend[0].gkbar_KDRI", 1,"", 0, 0 )
+dend[0].ek = -84
+xvalue("ek","dend[0].ek", 1,"", 0, 0 )
+xpanel(9,562)
+}
+{
+xpanel("hillock(0 - 1) (Parameters)", 0)
+xlabel("hillock(0 - 1) (Parameters)")
+xlabel("nseg = 30")
+hillock.L = 30
+xvalue("L","hillock.L", 1,"define_shape()", 0, 0 )
+hillock.cm = 1
+xvalue("cm","hillock.cm", 1,"", 0, 0 )
+xlabel("diam is not constant")
+hillock.gnabar_B_Na = 1.8
+xvalue("gnabar_B_Na","hillock.gnabar_B_Na", 1,"", 0, 0 )
+hillock.ena = 60
+xvalue("ena","hillock.ena", 1,"", 0, 0 )
+hillock.g_pas = 1.1e-05
+xvalue("g_pas","hillock.g_pas", 1,"", 0, 0 )
+hillock.e_pas = -70
+xvalue("e_pas","hillock.e_pas", 1,"", 0, 0 )
+hillock.gkbar_KDRI = 0.076
+xvalue("gkbar_KDRI","hillock.gkbar_KDRI", 1,"", 0, 0 )
+hillock.ek = -84
+xvalue("ek","hillock.ek", 1,"", 0, 0 )
+xpanel(628,567)
+}
+{
+xpanel("axon(0 - 1) (Parameters)", 0)
+xlabel("axon(0 - 1) (Parameters)")
+xlabel("nseg = 50")
+axon.L = 0.001
+xvalue("L","axon.L", 1,"define_shape()", 0, 0 )
+axon.cm = 1
+xvalue("cm","axon.cm", 1,"", 0, 0 )
+axon.diam = 0.001
+xvalue("diam","axon.diam", 1,"", 0, 0 )
+axon.gnabar_B_Na = 0
+xvalue("gnabar_B_Na","axon.gnabar_B_Na", 1,"", 0, 0 )
+axon.ena = 60
+xvalue("ena","axon.ena", 1,"", 0, 0 )
+axon.g_pas = 0
+xvalue("g_pas","axon.g_pas", 1,"", 0, 0 )
+axon.e_pas = -70
+xvalue("e_pas","axon.e_pas", 1,"", 0, 0 )
+axon.gkbar_KDRI = 0
+xvalue("gkbar_KDRI","axon.gkbar_KDRI", 1,"", 0, 0 )
+axon.ek = -84
+xvalue("ek","axon.ek", 1,"", 0, 0 )
+xpanel(949,566)
+}
+objectvar scene_vector_[1]
+{doNotify()}
