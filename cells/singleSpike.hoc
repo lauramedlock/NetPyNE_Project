@@ -1,23 +1,30 @@
 //* template AB
 begintemplate AB
 
+    public soma
     create soma
     access soma
 
-        soma nseg=1
-        soma diam=30.90 // calculated from Cm=30pF with diam=L
-        soma L=30.90  // calculated from Cm
-        soma Ra=1000 
+    proc init() {
 
-        soma insert leak
-        soma insert kv1
-        soma insert kv2
-        soma insert kv3
-        soma insert kv4
-        soma insert nav1p1
-        soma insert nav1p6
-        soma insert nav1p7
-        soma insert nav1p8
+        create soma
+        access soma
+
+        soma {
+        nseg=1
+        diam=30.90 
+        L=30.90 
+        Ra=1000 
+
+        insert leak
+        insert kv1
+        insert kv2
+        insert kv3
+        insert kv4
+        insert nav1p1
+        insert nav1p6
+        insert nav1p7
+        insert nav1p8
 
         ek = -88
         ena = 55
@@ -33,5 +40,7 @@ begintemplate AB
         gkbar_kv3 = 0.004
         gkbar_kv4 = 0.0008
         g_leak = 0.0001
+        }
+    }
 
 endtemplate AB
