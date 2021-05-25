@@ -1,0 +1,27 @@
+proc set_AbLTMR(){     
+    soma.L = 30.90
+    soma.diam = 30.90   
+    gnabar_nav1p1 = 0.008
+    gnabar_nav1p6 = 0.04
+    gnabar_nav1p7 = 0.005
+    gnabar_nav1p8 = 0
+    gkbar_kv1 = 0.006
+    gkbar_kv2 = 0.012
+    gkbar_kv3 = 0.004
+    gkbar_kv4 = 0.0008
+    g_leak = 0.0001
+}
+
+proc set_CLTMR(){
+    soma.L = 19.55
+    soma.diam = 19.55
+    gnabar_nav1p1 = 0
+    gnabar_nav1p6 = 0
+    gnabar_nav1p7 = 0.03
+    gnabar_nav1p8 = 0.04
+    gkbar_kv1 = 0.00006
+    gkbar_kv2 = 0.002
+    gkbar_kv3 = 0.00005
+    gkbar_kv4 = 0.011
+    g_leak = 0.00002
+}

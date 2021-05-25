@@ -1,0 +1,219 @@
+proc nav1p1param(){         
+print   "vhminf_nav1p1 ", vhminf_nav1p1 
+print   "kminf_nav1p1 ", kminf_nav1p1
+    
+print    "amtaul_nav1p1 ", amtaul_nav1p1
+print    "bmtaul_nav1p1 ", bmtaul_nav1p1
+print    "cmtaul_nav1p1 ", cmtaul_nav1p1 
+print    "dmtaul_nav1p1 ", dmtaul_nav1p1
+
+print    "brkvmtau_nav1p1 ", brkvmtau_nav1p1
+    
+print    "amtaur_nav1p1 ", amtaur_nav1p1
+print    "bmtaur_nav1p1 ", bmtaur_nav1p1
+print    "cmtaur_nav1p1 ", cmtaur_nav1p1
+print    "dmtaur_nav1p1 ", dmtaur_nav1p1 
+
+print    "vhhinf_nav1p1 ", vhhinf_nav1p1
+print    "khinf_nav1p1 ", khinf_nav1p1
+    
+print    "ahtaul_nav1p1 ", ahtaul_nav1p1
+print    "bhtaul_nav1p1 ", bhtaul_nav1p1
+print    "chtaul_nav1p1 ", chtaul_nav1p1
+print    "dhtaul_nav1p1 ", dhtaul_nav1p1
+
+print    "brkvhtau_nav1p1 ", brkvhtau_nav1p1
+    
+print    "ahtaur_nav1p1 ", ahtaur_nav1p1
+print    "bhtaur_nav1p1 ", bhtaur_nav1p1 
+print    "chtaur_nav1p1 ", chtaur_nav1p1 
+print    "dhtaur_nav1p1 ", dhtaur_nav1p1
+print    "gnabar_nav1p1 ", gnabar_nav1p1
+}
+
+proc nav1p6param(){         
+print   "vhminf_nav1p6 ", vhminf_nav1p6 
+print   "kminf_nav1p6 ", kminf_nav1p6
+    
+print    "amtaul_nav1p6 ", amtaul_nav1p6
+print    "bmtaul_nav1p6 ", bmtaul_nav1p6
+print    "cmtaul_nav1p6 ", cmtaul_nav1p6 
+print    "dmtaul_nav1p6 ", dmtaul_nav1p6
+
+print    "brkvmtau_nav1p6 ", brkvmtau_nav1p6
+    
+print    "amtaur_nav1p6 ", amtaur_nav1p6
+print    "bmtaur_nav1p6 ", bmtaur_nav1p6
+print    "cmtaur_nav1p6 ", cmtaur_nav1p6
+print    "dmtaur_nav1p6 ", dmtaur_nav1p6 
+
+print    "vhhinf_nav1p6 ", vhhinf_nav1p6
+print    "khinf_nav1p6 ", khinf_nav1p6
+    
+print    "ahtaul_nav1p6 ", ahtaul_nav1p6
+print    "bhtaul_nav1p6 ", bhtaul_nav1p6
+print    "chtaul_nav1p6 ", chtaul_nav1p6
+print    "dhtaul_nav1p6 ", dhtaul_nav1p6
+
+print    "brkvhtau_nav1p6 ", brkvhtau_nav1p6
+    
+print    "ahtaur_nav1p6 ", ahtaur_nav1p6
+print    "bhtaur_nav1p6 ", bhtaur_nav1p6 
+print    "chtaur_nav1p6 ", chtaur_nav1p6 
+print    "dhtaur_nav1p6 ", dhtaur_nav1p6
+print    "gnabar_nav1p6 ", gnabar_nav1p6
+}
+
+
+proc nav1p7param(){     
+print   "vhminf_nav1p7 ", vhminf_nav1p7 
+print   "kminf_nav1p7 ", kminf_nav1p7
+    
+print    "amtaul_nav1p7 ", amtaul_nav1p7
+print    "bmtaul_nav1p7 ", bmtaul_nav1p7
+print    "cmtaul_nav1p7 ", cmtaul_nav1p7 
+print    "dmtaul_nav1p7 ", dmtaul_nav1p7
+
+print    "brkvmtau_nav1p7 ", brkvmtau_nav1p7
+    
+print    "amtaur_nav1p7 ", amtaur_nav1p7
+print    "bmtaur_nav1p7 ", bmtaur_nav1p7
+print    "cmtaur_nav1p7 ", cmtaur_nav1p7
+print    "dmtaur_nav1p7 ", dmtaur_nav1p7 
+    
+print    "vhhinf_nav1p7 ", vhhinf_nav1p7
+print    "khinf_nav1p7 ", khinf_nav1p7
+    
+print    "ahtaul_nav1p7 ", ahtaul_nav1p7
+print    "bhtaul_nav1p7 ", bhtaul_nav1p7
+print    "chtaul_nav1p7 ", chtaul_nav1p7
+print    "dhtaul_nav1p7 ", dhtaul_nav1p7
+
+print    "brkvhtau_nav1p7 ", brkvhtau_nav1p7
+    
+print    "ahtaur_nav1p7 ", ahtaur_nav1p7
+print    "bhtaur_nav1p7 ", bhtaur_nav1p7 
+print    "chtaur_nav1p7 ", chtaur_nav1p7 
+print    "dhtaur_nav1p7", dhtaur_nav1p7
+print    "gnabar_nav1p7 ", gnabar_nav1p7
+}
+
+proc nav1p8param(){         
+print   "vhminf_nav1p8 ", vhminf_nav1p8 
+print   "kminf_nav1p8 ", kminf_nav1p8
+    
+print    "amtaul_nav1p8 ", amtaul_nav1p8
+print    "bmtaul_nav1p8 ", bmtaul_nav1p8
+print    "cmtaul_nav1p8 ", cmtaul_nav1p8 
+print    "dmtaul_nav1p8 ", dmtaul_nav1p8
+
+print    "brkvmtau_nav1p8 ", brkvmtau_nav1p8
+    
+print    "amtaur_nav1p8 ", amtaur_nav1p8
+print    "bmtaur_nav1p8 ", bmtaur_nav1p8
+print    "cmtaur_nav1p8 ", cmtaur_nav1p8
+print    "dmtaur_nav1p8 ", dmtaur_nav1p8 
+
+print    "vhhinf_nav1p8 ", vhhinf_nav1p8
+print    "khinf_nav1p8 ", khinf_nav1p8
+    
+print    "ahtaul_nav1p8 ", ahtaul_nav1p8
+print    "bhtaul_nav1p8 ", bhtaul_nav1p8
+print    "chtaul_nav1p8 ", chtaul_nav1p8
+print    "dhtaul_nav1p8 ", dhtaul_nav1p8
+
+print    "brkvhtau_nav1p8 ", brkvhtau_nav1p8
+    
+print    "ahtaur_nav1p8 ", ahtaur_nav1p8
+print    "bhtaur_nav1p8 ", bhtaur_nav1p8 
+print    "chtaur_nav1p8 ", chtaur_nav1p8 
+print    "dhtaur_nav1p8 ", dhtaur_nav1p8
+print    "gnabar_nav1p8 ", gnabar_nav1p8
+}
+
+proc kv1param(){
+print   "vhninf_kv1 ", vhninf_kv1 
+print   "kninf_kv1 ", kninf_kv1
+    
+print    "antaul_kv1 ", antaul_kv1
+print    "bntaul_kv1 ", bntaul_kv1
+print    "cntaul_kv1 ", cntaul_kv1 
+print    "dntaul_kv1 ", dntaul_kv1
+
+print    "brkvntau_kv1 ", brkvntau_kv1
+    
+print    "antaur_kv1 ", antaur_kv1
+print    "bntaur_kv1 ", bntaur_kv1
+print    "cntaur_kv1 ", cntaur_kv1
+print    "dntaur_kv1 ", dntaur_kv1 
+
+print    "gkbar_kv1 ", gkbar_kv1}
+
+
+proc kv2param(){
+print   "vhninf_kv2 ",vhninf_kv2 
+print   "kninf_kv2 ",kninf_kv2
+     
+print    "antaul_kv2 ",antaul_kv2
+print    "bntaul_kv2 ",bntaul_kv2
+print    "cntaul_kv2 ",cntaul_kv2 
+print    "dntaul_kv2 ",dntaul_kv2
+
+print    "brkvntau_kv2 ", brkvntau_kv2
+    
+print    "antaur_kv2 ",antaur_kv2
+print    "bntaur_kv2 ",bntaur_kv2
+print    "cntaur_kv2 ",cntaur_kv2
+print    "dntaur_kv2 ",dntaur_kv2 
+print    "gkbar_kv2 ", gkbar_kv2
+}
+
+proc kv3param(){
+print   "vhninf_kv3 ",vhninf_kv3 
+print   "kninf_kv3 ",kninf_kv3
+     
+print    "antaul_kv3 ",antaul_kv3
+print    "bntaul_kv3 ",bntaul_kv3
+print    "cntaul_kv3 ",cntaul_kv3 
+print    "dntaul_kv3 ",dntaul_kv3
+
+print    "brkvntau_kv3 ", brkvntau_kv3
+    
+print    "antaur_kv3 ",antaur_kv3
+print    "bntaur_kv3 ",bntaur_kv3
+print    "cntaur_kv3 ",cntaur_kv3
+print    "dntaur_kv3 ",dntaur_kv3 
+print    "gkbar_kv3 ", gkbar_kv3}
+
+proc kv4param(){
+print   "vhninf_kv4 ", vhninf_kv4 
+print   "kninf_kv4 ", kninf_kv4
+    
+print    "antaul_kv4 ", antaul_kv4
+print    "bntaul_kv4 ", bntaul_kv4
+print    "cntaul_kv4 ", cntaul_kv4 
+print    "dntaul_kv4 ", dntaul_kv4
+
+print    "brkvntau_kv4 ", brkvntau_kv4
+    
+print    "antaur_kv4 ", antaur_kv4
+print    "bntaur_kv4 ", bntaur_kv4
+print    "cntaur_kv4 ", cntaur_kv4
+print    "dntaur_kv4 ", dntaur_kv4 
+    
+print    "vhhinf_kv4 ", vhhinf_kv4
+print    "khinf_kv4 ", khinf_kv4
+    
+print    "ahtaul_kv4 ", ahtaul_kv4
+print    "bhtaul_kv4 ", bhtaul_kv4
+print    "chtaul_kv4 ", chtaul_kv4
+print    "dhtaul_kv4 ", dhtaul_kv4
+
+print    "brkvhtau_kv4 ", brkvhtau_kv4
+    
+print    "ahtaur_kv4 ", ahtaur_kv4
+print    "bhtaur_kv4 ", bhtaur_kv4 
+print    "chtaur_kv4 ", chtaur_kv4 
+print    "dhtaur_kv4 ", dhtaur_kv4
+print    "gkbar_kv4 ", gkbar_kv4}
+
