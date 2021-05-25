@@ -15,7 +15,8 @@ netParams.cellParams['E_delay'] = {'secs': {'soma': {}}}
 netParams.cellParams['E_delay']['secs']['soma']['geom'] = {
     'diam': 19.55,
     'L'   : 19.55,
-    'Ra'  : 1000
+    'Ra'  : 1000,
+    'nseg': 1,
 }
 netParams.cellParams['E_delay']['secs']['soma']['mechs'] = {
     'leak':   {'g': 0.00002},
@@ -28,7 +29,10 @@ netParams.cellParams['E_delay']['secs']['soma']['mechs'] = {
     'nav1p7': {'gnabar': 0.03},
     'nav1p8': {'gnabar': 0.04},
 }
-
+netParams.cellParams['E_delay']['secs']['soma']['ions'] = {
+    'k': {'e': -88.0},
+    'na': {'e': 55.0},
+}
 
 netParams.popParams['E_delay'] = {'cellType':'E_delay', 'numCells': 1}
 
@@ -49,7 +53,8 @@ netParams.stimTargetParams['Input_1->E_delay'] = {
 
 
 ## cfg  
-cfg = specs.SimConfig()                             
+cfg = specs.SimConfig()   
+cfg.hParams = {'v_init': -80.0}  
 cfg.duration = 2*1e3                                    
 cfg.dt = 0.01                                           
 #cfg.verbose = 1                                            
