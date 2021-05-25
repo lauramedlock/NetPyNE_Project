@@ -3,12 +3,12 @@ begintemplate AB
 
     public soma
     create soma
-    access soma
+    
 
     proc init() {
 
         create soma
-        access soma
+        
 
         soma {
         nseg=1
