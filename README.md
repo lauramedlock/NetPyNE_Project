@@ -9,7 +9,7 @@ Inhibitory Neurons --> ais_model.py (for tonic spiking, detailed morphology)
 To run the model...  
 In bash terminal:
 1. cd to directory (../NetPyNE-Project)
-2. compile .mods using nrnivmodl mods
+2. compile .mods using >> nrnivmodl mods
   
 Open iPython terminal then:  
-3. run init.py
+3. >> run init.py
