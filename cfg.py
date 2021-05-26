@@ -13,7 +13,7 @@ cfg = specs.SimConfig()	# object of class SimConfig to store simulation configur
 ###############################################################################
 # SIMULATION PARAMETERS
 ###############################################################################
-cfg.duration = ais_variables.TSTOP # Duration of the simulation, in ms
+cfg.duration = 2000 # Duration of the simulation, in ms
 cfg.dt = ais_variables.DT # Internal integration timestep to use
 
 cfg.createNEURONObj = 1  # create HOC objects when instantiating network
@@ -33,7 +33,7 @@ cfg.saveFolder = 'data'
 #cfg.saveMat = True
 #cfg.saveDataInclude = ['simConfig', 'netParams']
 
-cfg.analysis['plotTraces'] = {'include': [0,1,2], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
+cfg.analysis['plotTraces'] = {'include': [0,1,2,3], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
 
 
 

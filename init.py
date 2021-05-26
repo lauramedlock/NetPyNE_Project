@@ -5,10 +5,10 @@ Running this code will use netParams and cfg for the network model
 
 Steps:
 In bash Terminal:
-1. cd to directory (../NetPyNE-Project/cells)
-2. compile .mods using nrnivmodl 
+1. cd to directory (../NetPyNE-Project)
+2. compile .mods using >> nrnivmodl mods
 In iPython terminal:
-3. run init.py
+3. >> run init.py
 '''
 
 from netpyne import sim

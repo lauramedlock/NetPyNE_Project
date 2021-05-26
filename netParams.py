@@ -73,6 +73,30 @@ netParams.cellParams['E_single']['secs']['soma']['mechs'] = {
     'nav1p8': {'gnabar': 0},
 }
 
+# Excitatory Spinal Neurons (Tonic Spiking)
+netParams.cellParams['E_tonic'] = {'secs': {'soma': {}}}
+netParams.cellParams['E_tonic']['secs']['soma']['geom'] = {
+    'diam': 19.55,
+    'L'   : 19.55,
+    'Ra'  : 1000,
+    'nseg': 1
+}
+netParams.cellParams['E_tonic']['secs']['soma']['ions'] = {
+    'k': {'e': -88.0},
+    'na': {'e': 55.0},
+}
+netParams.cellParams['E_tonic']['secs']['soma']['mechs'] = {
+    'leak':   {'g': 0.00002},
+    'kv1':    {'gkbar': 0.00006},
+    'kv2':    {'gkbar': 0.002},
+    'kv3':    {'gkbar': 0.00005},
+    'kv4':    {'gkbar': 0.0001},
+    'nav1p1': {'gnabar': 0},
+    'nav1p6': {'gnabar': 0},
+    'nav1p7': {'gnabar': 0.03},
+    'nav1p8': {'gnabar': 0.04},
+}
+
 ###############################################################################
 # POPULATION PARAMETERS
 ###############################################################################
@@ -91,14 +115,19 @@ netParams.popParams['E_single'] = {'cellType':'E_single',
                                   'numCells': 1, 
                                   'cellModel': 'E_single'}
 
+# Tonic Spike Pop (Excitatory)
+netParams.popParams['E_tonic'] = {'cellType':'E_tonic', 
+                                  'numCells': 1, 
+                                  'cellModel': 'E_tonic'}
+
 ###############################################################################
 # STIMULATION PARAMETERS
 ###############################################################################
 # Stimulation Sources:                                  
 netParams.stimSourceParams['IClamp'] = {'type': 'IClamp', 
-                                       'del': ais_variables.DELAY,
-                                       'dur': ais_variables.DUR,
-                                       'amp': 0.1}
+                                       'del': 500,
+                                       'dur': 1000,
+                                       'amp': 0.08}
 
 # Stimulation Targets:                                     
 netParams.stimTargetParams['Input->I_tonic'] = {'source': 'IClamp',  # IClamp --> I_tonic
@@ -115,3 +144,9 @@ netParams.stimTargetParams['Input->E_single'] = {'source': 'IClamp',  # IClamp -
                                                   'sec':'soma',
                                                   'loc': ais_variables.RECORDING_LOCATION,
                                                   'conds': {'pop':'E_single'}}
+
+netParams.stimTargetParams['Input->E_tonic'] = {'source': 'IClamp',  # IClamp --> E_tonic
+                                                  'sec':'soma',
+                                                  'loc': ais_variables.RECORDING_LOCATION,
+                                                  'conds': {'pop':'E_tonic'}}
+
