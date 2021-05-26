@@ -138,37 +138,37 @@ netParams.popParams['E_tonic'] = {'cellType':'E_tonic',
                                   'zRange' : [300,400]}
 
 # PANs 
-netParams.popParams['PAN'] = {'cellType':'E_tonic', 
+netParams.popParams['PAN'] = {'cellType':'E_delay', 
                                   'gridSpacing': 50,
                                   'xRange' : [0,200], 
                                   'yRange' : [0,200], 
                                   'zRange' : [0,0], 
-                                  'cellModel': 'E_tonic'}
+                                  'cellModel': 'E_delay'}
 
 ###############################################################################
 # SYNAPTIC PARAMETERS
 ###############################################################################
 
 ## Synaptic mechanism parameters
-netParams.synMechParams['AMPA'] = {'mod': 'Exp2Syn', 'tau1': 0.1, 'tau2': 5.0, 'e': 0}  
+netParams.synMechParams['AMPA'] = {'mod': 'Exp2Syn', 'tau1': 0.1, 'tau2': 1.0, 'e': 0}  
 netParams.synMechParams['GABA'] = {'mod': 'Exp2Syn', 'tau1': 1.0, 'tau2': 20.0, 'e': -80}  
 
 ###############################################################################
 # CONNECTIVITY PARAMETERS
 ###############################################################################
 
-
+netParams['centerX'] = 100
+netParams['centerY'] = 100
 
 netParams.connParams['PAN->E_delay'] = {    #  PAN --> E_delay
         'preConds': {'pop': 'PAN'},
         'postConds': {'pop': 'E_delay'},
         'sec': 'soma',                  # target postsyn section
         'synMech': 'AMPA',              # target synaptic mechanism
-        'weight': cfg.z[testX,testY],   # synaptic weight
+        'weight': 'max(0,1.0 - ((1/100)* (((pre_x - centerX)**2 + (pre_y - centerY)**2)**0.5)))',                  # synaptic weight
         'prob': 0.1,                    # synaptic weight
         'delay': 10,                    # transmission delay (ms)
         }
-
 
 ###############################################################################
 # STIMULATION PARAMETERS
@@ -182,7 +182,7 @@ netParams.stimSourceParams['IClamp'] = {'type': 'IClamp',
 netParams.stimSourceParams['Mech'] = {'type': 'IClamp', 
                                        'del': 500,
                                        'dur': 500,
-                                       'amp': 0.01}
+                                       'amp': 0.05}
 
 # Stimulation Targets:                                     
 # netParams.stimTargetParams['Input->I_tonic'] = {'source': 'IClamp',  # IClamp --> I_tonic
