@@ -11,5 +11,5 @@ In bash terminal:
 1. cd to directory (../NetPyNE-Project)
 2. compile .mods using >> nrnivmodl mods
   
-Open iPython terminal then:  
+Open iPython (interactive):  
 3. >> run init.py
