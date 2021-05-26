@@ -4,8 +4,12 @@ This is the netParams.py file for the NetPyNE Project by L Medlock & M Mazar
 
 from netpyne import specs, sim
 from neuron import h, gui
-from ais_variables import *
 import matplotlib
+import os
+import sys
+sys.path.insert(0, 'cells')  # adding path to cells dir
+import ais_variables
+
 
 # Network parameters
 netParams = specs.NetParams()  # object of class NetParams to store the network parameters
@@ -17,7 +21,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 netParams.importCellParams(
         label='dh_tonic_interneuron',
         conds={'cellType': 'IHB', 'cellModel': 'TONIC'},
-        fileName='ais_model.py',
+        fileName=('ais_model.py'),
         cellName='laminaNeuron',
         importSynMechs=False)
 
@@ -60,10 +64,10 @@ netParams.cellParams['E_single']['secs']['soma']['ions'] = {
 netParams.cellParams['E_single']['secs']['soma']['mechs'] = {
     'leak':   {'g': 0.0001},
     'kv1':    {'gkbar': 0.006},
-    'kv2':    {'gkbar': 0.01},
+    'kv2':    {'gkbar': 0.012},
     'kv3':    {'gkbar': 0.004},
     'kv4':    {'gkbar': 0.0008},
-    'nav1p1': {'gnabar': 0.01},
+    'nav1p1': {'gnabar': 0.008},
     'nav1p6': {'gnabar': 0.04},
     'nav1p7': {'gnabar': 0.005},
     'nav1p8': {'gnabar': 0},
@@ -92,22 +96,22 @@ netParams.popParams['E_single'] = {'cellType':'E_single',
 ###############################################################################
 # Stimulation Sources:                                  
 netParams.stimSourceParams['IClamp'] = {'type': 'IClamp', 
-                                       'del': DELAY,
-                                       'dur': DUR,
-                                       'amp': 0.08}
+                                       'del': ais_variables.DELAY,
+                                       'dur': ais_variables.DUR,
+                                       'amp': 0.1}
 
-# Define stimulation target:                                     
+# Stimulation Targets:                                     
 netParams.stimTargetParams['Input->I_tonic'] = {'source': 'IClamp',  # IClamp --> I_tonic
                                                   'sec':'soma',
-                                                  'loc': RECORDING_LOCATION,
+                                                  'loc': ais_variables.RECORDING_LOCATION,
                                                   'conds': {'pop':'I_tonic'}}
 
 netParams.stimTargetParams['Input->E_delay'] = {'source': 'IClamp',  # IClamp --> E_delay
                                                   'sec':'soma',
-                                                  'loc': RECORDING_LOCATION,
+                                                  'loc': ais_variables.RECORDING_LOCATION,
                                                   'conds': {'pop':'E_delay'}}
 
 netParams.stimTargetParams['Input->E_single'] = {'source': 'IClamp',  # IClamp --> E_single
                                                   'sec':'soma',
-                                                  'loc': RECORDING_LOCATION,
+                                                  'loc': ais_variables.RECORDING_LOCATION,
                                                   'conds': {'pop':'E_single'}}
