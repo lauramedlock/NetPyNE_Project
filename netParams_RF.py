@@ -14,7 +14,7 @@ import ais_variables
 try:
     from __main__ import cfg
 except:
-    from cfg_test import cfg
+    from cfg_RF import cfg
 
 # Network parameters
 netParams = specs.NetParams()  # object of class NetParams to store the network parameters
@@ -184,15 +184,15 @@ netParams.connParams['PAN->I_tonic'] = {    #  PAN --> E_delay
 # STIMULATION PARAMETERS
 ###############################################################################
 # Stimulation Sources:                                  
-netParams.stimSourceParams['IClamp'] = {'type': 'IClamp', 
-                                       'del': 500,
-                                       'dur': 1000,
-                                       'amp': 0.08}
+# netParams.stimSourceParams['IClamp'] = {'type': 'IClamp', 
+#                                        'del': 500,
+#                                        'dur': 1000,
+#                                        'amp': 0.08}
 
-netParams.stimSourceParams['IClamp2'] = {'type': 'IClamp', 
-                                       'del': 500,
-                                       'dur': 500,
-                                       'amp': 0.05}
+# netParams.stimSourceParams['IClamp2'] = {'type': 'IClamp', 
+#                                        'del': 500,
+#                                        'dur': 500,
+#                                        'amp': 0.05}
 
 netParams.stimSourceParams['Mech'] = {'type': 'NetStim', 
                                         'rate' : 10,
