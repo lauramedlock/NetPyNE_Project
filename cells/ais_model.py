@@ -42,7 +42,7 @@ class laminaNeuron():
         self.soma.diam = SOMA_DIAM
         self.soma.nseg = SOMA_NSEG
         # Spacer
-        self.spacer.L = SPACER_L
+        self.spacer.L = SPACER_L        # change this for neuropathic conditions
         self.spacer.diam = SPACER_DIAM
         self.spacer.nseg = SPACER_NSEG
         # AIS

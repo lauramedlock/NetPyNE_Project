@@ -33,8 +33,12 @@ cfg.saveFolder = 'data'
 #cfg.saveMat = True
 #cfg.saveDataInclude = ['simConfig', 'netParams']
 
-cfg.analysis['plotTraces'] = {'include': [0,1,2,3], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
-
+cfg.analysis['plotTraces'] = {'include': [0,25,30,35,38,40], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} 
+cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 'saveFig': True}
+#cfg.analysis['plotSpikeHist'] = {'include':['PAN'],'timeRange':[0,cfg.duration], 'binSize': 100, 'graphType':'bar','saveFig': True}
+#cfg.analysis['plot2Dnet'] = {'showConns': True,'saveFig': True}
+#cfg.analysis['plotShape'] = {'includePre':['PAN'], 'includePost':[],'showSyns': False,'dist': 0.8,'showFig': True}
+cfg.analysis['plotConn'] = {'groupBy':'pop','saveFig': True}
 
 
 

@@ -13,6 +13,7 @@ import ais_variables
 
 # Network parameters
 netParams = specs.NetParams()  # object of class NetParams to store the network parameters
+netParams.defaultThreshold = 0.0
 
 ###############################################################################
 # CELL PARAMETERS
@@ -24,8 +25,9 @@ netParams.importCellParams(
         fileName=('ais_model.py'),
         cellName='laminaNeuron',
         importSynMechs=False)
+netParams.cellParams['dh_tonic_interneuron']['secs']['soma']['threshold'] = 0.0
 
-# Excitatory Spinal Neurons (Delayed Spiking)
+# Delayed Spiking (Excitatory)
 netParams.cellParams['E_delay'] = {'secs': {'soma': {}}}
 netParams.cellParams['E_delay']['secs']['soma']['geom'] = {
     'diam': 19.55,
@@ -49,7 +51,7 @@ netParams.cellParams['E_delay']['secs']['soma']['mechs'] = {
     'nav1p8': {'gnabar': 0.04},
 }
 
-# Excitatory Spinal Neurons (Single Spiking)
+# Single Spiking (Excitatory)
 netParams.cellParams['E_single'] = {'secs': {'soma': {}}}
 netParams.cellParams['E_single']['secs']['soma']['geom'] = {
     'diam': 30.90,
@@ -73,7 +75,7 @@ netParams.cellParams['E_single']['secs']['soma']['mechs'] = {
     'nav1p8': {'gnabar': 0},
 }
 
-# Excitatory Spinal Neurons (Tonic Spiking)
+# Tonic Spiking (Excitatory)
 netParams.cellParams['E_tonic'] = {'secs': {'soma': {}}}
 netParams.cellParams['E_tonic']['secs']['soma']['geom'] = {
     'diam': 19.55,
@@ -94,59 +96,149 @@ netParams.cellParams['E_tonic']['secs']['soma']['mechs'] = {
     'nav1p1': {'gnabar': 0},
     'nav1p6': {'gnabar': 0},
     'nav1p7': {'gnabar': 0.03},
-    'nav1p8': {'gnabar': 0.04},
-}
+    'nav1p8': {'gnabar': 0.04}
+    }
 
 ###############################################################################
 # POPULATION PARAMETERS
 ###############################################################################
-# Tonic Pop (Inhibitory)
+# PANs 
+netParams.popParams['PAN'] = {'cellType':'E_delay', 
+                                  'cellModel': 'E_delay',
+                                  'gridSpacing': 50,
+                                  'xRange' : [0,200], 
+                                  'yRange' : [0,200], 
+                                  'zRange' : [0,0]
+                                  }
+
+#Tonic Pop (Inhibitory)
 netParams.popParams['I_tonic'] = {'cellType': 'IHB',
-                                    'numCells': 1,
-                                    'cellModel': 'TONIC'}
+                                  'numCells': 5,
+                                  'cellModel': 'TONIC',
+                                  'xRange' : [150,350], 
+                                  'yRange' : [150,350], 
+                                  'zRange' : [300,400] }
 
 # Delayed Pop (Excitatory)
 netParams.popParams['E_delay'] = {'cellType':'E_delay', 
-                                  'numCells': 1, 
-                                  'cellModel': 'E_delay'}
+                                  'numCells': 5, 
+                                  'cellModel': 'E_delay',
+                                  'xRange' : [150,350], 
+                                  'yRange' : [150,350], 
+                                  'zRange' : [300,400] }
 
 # Single Spike Pop (Excitatory)
 netParams.popParams['E_single'] = {'cellType':'E_single', 
-                                  'numCells': 1, 
-                                  'cellModel': 'E_single'}
+                                  'numCells': 3, 
+                                  'cellModel': 'E_single',
+                                  'xRange' : [150,350], 
+                                  'yRange' : [150,350], 
+                                  'zRange' : [300,400] }
 
 # Tonic Spike Pop (Excitatory)
 netParams.popParams['E_tonic'] = {'cellType':'E_tonic', 
-                                  'numCells': 1, 
-                                  'cellModel': 'E_tonic'}
+                                  'numCells': 2, 
+                                  'cellModel': 'E_tonic',
+                                  'xRange' : [150,350], 
+                                  'yRange' : [150,350], 
+                                  'zRange' : [300,400]}
+
+# Spinal Projection Neurons
+netParams.popParams['PROJ'] = {'cellType':'E_delay', 
+                                  'numCells': 5, 
+                                  'cellModel': 'E_delay',
+                                  'xRange' : [150,350], 
+                                  'yRange' : [150,350], 
+                                  'zRange' : [400,500] }
+
+###############################################################################
+# SYNAPTIC PARAMETERS
+###############################################################################
+
+## Synaptic mechanism parameters
+netParams.synMechParams['AMPA'] = {'mod': 'Exp2Syn', 'tau1': 0.1, 'tau2': 1.0, 'e': 0}  
+netParams.synMechParams['GABA'] = {'mod': 'Exp2Syn', 'tau1': 1.0, 'tau2': 20.0, 'e': -80}  
+
+###############################################################################
+# CONNECTIVITY PARAMETERS
+###############################################################################
+#------------------------PAN2E Connections -----------------------#
+netParams.connParams['PAN->E'] = {    
+    'preConds': {'pop': 'PAN'}, 'postConds': {'pop': ['E_delay','E_single','E_tonic']},  
+    'probability': 0.2,             # probability of connection
+    'weight': 0.04,                 # synaptic weight
+    'delay': 5,                     # transmission delay (ms)
+    'synMech': 'AMPA'}              # synaptic mechanism
+
+#------------------------PAN2I Connections -----------------------#
+netParams.connParams['PAN->I'] = {    
+    'preConds': {'pop': 'PAN'}, 'postConds': {'pop': ['I_tonic']},  
+    'probability': 0.2,             # probability of connection
+    'weight': 0.04,                 # synaptic weight
+    'delay': 5,                     # transmission delay (ms)
+    'synMech': 'AMPA'}              # synaptic mechanism
+
+#-----------------------I2E Connections -----------------------#
+netParams.connParams['I->E'] = {    
+    'preConds': {'pop': 'I_tonic'}, 'postConds': {'pop': ['E_delay','E_single','E_tonic']},  
+    'probability': 0.5,             # probability of connection
+    'weight': 0.05,                 # synaptic weight
+    'delay': 5,                     # transmission delay (ms)
+    'synMech': 'GABA'}              # synaptic mechanism
+
+#------------------------------E2PROJ Connections -----------------------#
+netParams.connParams['E->PROJ'] = {
+  'preConds': {'pop': ['E_delay','E_single','E_tonic']}, 'postConds': {'pop':['PROJ']},      
+  'probability': 0.2,               # probability of connection
+  'weight': 0.04,                   # synaptic weight 
+  'delay': 5,                       # transmission delay (ms) 
+  'sec': ['soma'], 
+  'synMech': 'AMPA'}   
+
 
 ###############################################################################
 # STIMULATION PARAMETERS
 ###############################################################################
 # Stimulation Sources:                                  
-netParams.stimSourceParams['IClamp'] = {'type': 'IClamp', 
-                                       'del': 500,
-                                       'dur': 1000,
-                                       'amp': 0.08}
+# netParams.stimSourceParams['IClamp'] = {'type': 'IClamp', 
+#                                        'del': 500,
+#                                        'dur': 1000,
+#                                        'amp': 0.08}
+
+# netParams.stimSourceParams['IClamp2'] = {'type': 'IClamp', 
+#                                        'del': 500,
+#                                        'dur': 1000,
+#                                        'amp': 0.5}
+
+netParams.stimSourceParams['Mech'] = {'type': 'NetStim', 
+                                        'rate' : 10,
+                                        'start': 200,
+                                        'interval': 'uniform(20,100)',
+                                        'noise': 0.5}
 
 # Stimulation Targets:                                     
-netParams.stimTargetParams['Input->I_tonic'] = {'source': 'IClamp',  # IClamp --> I_tonic
+netParams.stimTargetParams['Input->PAN'] = {'source': 'Mech',  # Input --> PAN
                                                   'sec':'soma',
-                                                  'loc': ais_variables.RECORDING_LOCATION,
-                                                  'conds': {'pop':'I_tonic'}}
+                                                  'loc': 0.5,
+                                                  'conds': {'pop':'PAN'}}
 
-netParams.stimTargetParams['Input->E_delay'] = {'source': 'IClamp',  # IClamp --> E_delay
-                                                  'sec':'soma',
-                                                  'loc': ais_variables.RECORDING_LOCATION,
-                                                  'conds': {'pop':'E_delay'}}
+# netParams.stimTargetParams['Input->E_delay'] = {'source': 'IClamp',  # IClamp --> E_delay
+#                                                   'sec':'soma',
+#                                                   'loc': 0.5,
+#                                                   'conds': {'pop':'E_delay'}}
 
-netParams.stimTargetParams['Input->E_single'] = {'source': 'IClamp',  # IClamp --> E_single
-                                                  'sec':'soma',
-                                                  'loc': ais_variables.RECORDING_LOCATION,
-                                                  'conds': {'pop':'E_single'}}
+# netParams.stimTargetParams['Input->E_single'] = {'source': 'IClamp2',  # IClamp2 --> E_single
+#                                                   'sec':'soma',
+#                                                   'loc': 0.5,
+#                                                   'conds': {'pop':'E_single'}}
 
-netParams.stimTargetParams['Input->E_tonic'] = {'source': 'IClamp',  # IClamp --> E_tonic
-                                                  'sec':'soma',
-                                                  'loc': ais_variables.RECORDING_LOCATION,
-                                                  'conds': {'pop':'E_tonic'}}
+# netParams.stimTargetParams['Input->E_tonic'] = {'source': 'IClamp',  # IClamp --> E_tonic
+#                                                   'sec':'soma',
+#                                                   'loc': 0.5,
+#                                                   'conds': {'pop':'E_tonic'}}
+
+# netParams.stimTargetParams['Input->I_tonic'] = {'source': 'IClamp',  # IClamp --> I_tonic
+#                                                   'sec':'soma',
+#                                                   'loc': 0.5,
+#                                                   'conds': {'pop':'I_tonic'}}
 
