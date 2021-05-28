@@ -18,19 +18,9 @@ cfg = specs.SimConfig()	# object of class SimConfig to store simulation configur
 ###############################################################################
 cfg.centerX = 100
 cfg.centerY = 100
-cfg.radius = 200
-cfg.sigmaV = 20
-cfg.scaleZ = 100
-
-cfg.testWgt = 0.1
-
-cfg.mu = np.array([cfg.centerX, cfg.centerY])  # define the center of the receptive field
-cfg.x, cfg.y = np.mgrid[0:cfg.radius:200j, 0:cfg.radius:200j] # define coordinates of receptive field
-cfg.xy = np.column_stack([cfg.x.flat, cfg.y.flat]) # Need an (N, 2) array of (x, y) pairs.
-cfg.sigma = np.array([cfg.sigmaV, cfg.sigmaV])
-cfg.covariance = np.diag(cfg.sigma**2)
-cfg.z = multivariate_normal.pdf(cfg.xy, mean=cfg.mu, cov=cfg.covariance)
-cfg.z = cfg.scaleZ * cfg.z.reshape(cfg.x.shape) # Reshape back to a (radius x radius) grid.
+cfg.radius = 75
+cfg.peakWeight = 0.1
+cfg.weightDecay = 1/cfg.radius # (weight/um)
 
 
 ###############################################################################
@@ -48,19 +38,18 @@ cfg.recordCells = {'all'}
 cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}
 cfg.recordStep = 0.01                       
 
-# Save and display data
-cfg.simLabel = 'model'
+# SAVING
+cfg.simLabel = 'network'
 cfg.saveFolder = 'data'
-#cfg.savePickle = False
-#cfg.saveJson = False
-#cfg.saveMat = True
-#cfg.saveDataInclude = ['simConfig', 'netParams']
+cfg.saveJson = True
+cfg.saveDataInclude = ['netPops','netCells']
 
-cfg.analysis['plotTraces'] = {'include': [0,1,2,3], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
+cfg.analysis['plotTraces'] = {'include': [0,25,26], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
 cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 'saveFig': True}
+cfg.analysis['plotSpikeHist'] = {'include':[25],'timeRange':[0,cfg.duration], 'binSize': 5, 'graphType':'bar','saveFig': True}
 cfg.analysis['plot2Dnet'] = {'showConns': True,'saveFig': True}
 #cfg.analysis['plotShape'] = {'includePre':['PAN'], 'includePost':[],'showSyns': False,'dist': 0.8,'showFig': True}
-
+cfg.analysis['plotConn'] = {'groupBy':'cell','feature':'weight','saveFig': True}
 
 
 
