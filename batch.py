@@ -7,7 +7,7 @@ params = specs.ODict()
 
 # fill in with parameters to explore and range of values (key has to coincide with a variable in simConfig)
 params['spacerL'] = [5, 25, 30, 50]
-params['connWeight'] = [0.005, 0.01, 0.05, 0.10]
+params['connWeight'] = [0.005, 0.01, 0.025, 0.05]
 
 # create Batch object with parameters to modify, and specifying files to use
 b = Batch(params=params, cfgFile='cfg.py', netParamsFile='netParams.py',)
