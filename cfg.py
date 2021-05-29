@@ -34,7 +34,7 @@ cfg.recordStep = 0.1
 #cfg.saveDataInclude = ['simConfig', 'netParams']
 
 #cfg.analysis['plotTraces'] = {'include': [0,25,30,35,38,40], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} 
-cfg.analysis['plotTraces'] = {'include':[0], 'saveFig':True}
+cfg.analysis['plotTraces'] = {'include':[25], 'saveFig':True}
 cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 'saveFig': True}
 #cfg.analysis['plotSpikeHist'] = {'include':['PAN'],'timeRange':[0,cfg.duration], 'binSize': 100, 'graphType':'bar','saveFig': True}
 #cfg.analysis['plot2Dnet'] = {'showConns': True,'saveFig': True}
