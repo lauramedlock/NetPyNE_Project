@@ -27,7 +27,7 @@ cfg.recordStep = 0.1
 
 # Save and display data
 #cfg.simLabel = 'model'
-#cfg.saveFolder = 'data'
+#cfg.saveFolder = 'data' # re-enable this after batches are done
 #cfg.savePickle = False
 #cfg.saveJson = False
 #cfg.saveMat = True
