@@ -10,6 +10,11 @@ import sys
 sys.path.insert(0, 'cells')  # adding path to cells dir
 import ais_variables
 
+try:
+    from __main__ import cfg
+except:
+    from cfg import cfg
+
 
 # Network parameters
 netParams = specs.NetParams()  # object of class NetParams to store the network parameters
@@ -25,6 +30,7 @@ netParams.importCellParams(
         fileName=('ais_model.py'),
         cellName='laminaNeuron',
         importSynMechs=False)
+netParams.cellParams['dh_tonic_interneuron']['secs']['spacer']['geom']['L'] = cfg.spacerL
 netParams.cellParams['dh_tonic_interneuron']['secs']['soma']['threshold'] = 0.0
 
 # Delayed Spiking (Excitatory)
@@ -182,7 +188,7 @@ netParams.connParams['PAN->I'] = {
 netParams.connParams['I->E'] = {    
     'preConds': {'pop': 'I_tonic'}, 'postConds': {'pop': ['E_delay','E_single','E_tonic']},  
     'probability': 0.5,             # probability of connection
-    'weight': 0.05,                 # synaptic weight
+    'weight': cfg.connWeight,       # synaptic weight  (original weight for network is 0.05 at 10 mN)
     'delay': 5,                     # transmission delay (ms)
     'synMech': 'GABA'}              # synaptic mechanism
 
