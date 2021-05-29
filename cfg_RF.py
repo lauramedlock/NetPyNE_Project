@@ -39,17 +39,18 @@ cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}
 cfg.recordStep = 0.01                       
 
 # SAVING
-cfg.simLabel = 'network'
+cfg.simLabel = 'RF'
 cfg.saveFolder = 'data'
 cfg.saveJson = True
 cfg.saveDataInclude = ['netPops','netCells']
 
-cfg.analysis['plotTraces'] = {'include': [0,25,26], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
+#cfg.analysis['plotTraces'] = {'include': [0,25,26], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} # 'saveData':  'data/model_plotTraces.json'
 cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 'saveFig': True}
-cfg.analysis['plotSpikeHist'] = {'include':[25],'timeRange':[0,cfg.duration], 'binSize': 5, 'graphType':'bar','saveFig': True}
-cfg.analysis['plot2Dnet'] = {'showConns': True,'saveFig': True}
+cfg.analysis['plotSpikeHist'] = {'include':['PAN','I_tonic','E_delay'],'overlay':False,'timeRange':[0,cfg.duration], 'binSize': 100, 'graphType':'bar','saveFig': True}
+cfg.analysis['plotSpikeStats'] = {'include':['eachPop'], 'stats':['rate'],'graphType':'boxplot','xlim':[0,30], 'saveFig':True}
+#cfg.analysis['plot2Dnet'] = {'showConns': True,'saveFig': True}
 #cfg.analysis['plotShape'] = {'includePre':['PAN'], 'includePost':[],'showSyns': False,'dist': 0.8,'showFig': True}
-cfg.analysis['plotConn'] = {'groupBy':'cell','feature':'weight','saveFig': True}
+#cfg.analysis['plotConn'] = {'groupBy':'cell','feature':'weight','saveFig': True}
 
 
 

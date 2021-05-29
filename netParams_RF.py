@@ -175,10 +175,21 @@ netParams.connParams['PAN->I_tonic'] = {    #  PAN --> E_delay
         'postConds': {'pop': 'I_tonic'},
         'sec': 'soma',                  # target postsyn section
         'synMech': 'AMPA',              # target synaptic mechanism
-        'weight': 'max(0,0.5 - ((1/300)* (((pre_x - 100)**2 + (pre_y - 100)**2)**0.5)))',                  # synaptic weight
+        'weight': 'max(0,0.1*(0.5 - ((1/300)* (((pre_x - 100)**2 + (pre_y - 100)**2)**0.5))))',                  # synaptic weight
         'prob': 0.05,                    # synaptic probability
         'delay': 10,                     # transmission delay (ms)
         }
+
+netParams.connParams['I_tonic->E_delay'] = {    #  PAN --> E_delay
+        'preConds': {'pop': 'I_tonic'},
+        'postConds': {'pop': 'E_delay'},
+        'sec': 'soma',                   # target postsyn section
+        'synMech': 'GABA',               # target synaptic mechanism
+        'weight': 0.15,                # synaptic weight
+        'prob': 0.1,                    # synaptic probability
+        'delay': 10,                      # transmission delay (ms)
+        }
+
 
 ###############################################################################
 # STIMULATION PARAMETERS
@@ -189,18 +200,25 @@ netParams.connParams['PAN->I_tonic'] = {    #  PAN --> E_delay
 #                                        'dur': 1000,
 #                                        'amp': 0.08}
 
-# netParams.stimSourceParams['IClamp2'] = {'type': 'IClamp', 
-#                                        'del': 500,
-#                                        'dur': 500,
-#                                        'amp': 0.05}
-
 netParams.stimSourceParams['Mech'] = {'type': 'NetStim', 
-                                        'rate' : 10,
+                                        'rate' : 2,
                                         'start': 200,
                                         'interval': 'uniform(20,100)',
                                         'noise': 0.5}
 
-# Stimulation Targets:                                     
+# Stimulation Targets:  
+# 
+netParams.centerRF = [6,11,16,7,12,17,8,13,18]
+netParams.surrRF = [0,5,10,15,20,1,21,2,22,3,23,4,24]
+netParams.allRF = np.arange(25)
+
+netParams.stimTargetParams['Input->PAN'] = {'source': 'Mech',  # Mech --> PAN
+                                                  'sec':'soma',
+                                                  'loc': 0.5,
+                                                  'weight': 0.5,
+                                                  'delay' : 1,
+                                                  'conds': {'pop':'PAN', 'cellList': netParams.allRF}}  #
+#                                    
 # netParams.stimTargetParams['Input->I_tonic'] = {'source': 'IClamp',  # IClamp --> I_tonic
 #                                                   'sec':'soma',
 #                                                   'loc': ais_variables.RECORDING_LOCATION,
@@ -221,12 +239,6 @@ netParams.stimSourceParams['Mech'] = {'type': 'NetStim',
 #                                                   'loc': ais_variables.RECORDING_LOCATION,
 #                                                   'conds': {'pop':'E_tonic'}}
 
-netParams.stimTargetParams['Input->PAN'] = {'source': 'Mech',  # Mech --> PAN
-                                                  'sec':'soma',
-                                                  'loc': 0.5,
-                                                  'weight': 0.5,
-                                                  'delay' : 1,
-                                                  'conds': {'pop':'PAN'}}  #, 'cellList': [23,24,19]
 
 
 
