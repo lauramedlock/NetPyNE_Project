@@ -14,7 +14,7 @@ In iPython terminal:
 from netpyne import sim
 from neuron import h
 					
-simConfig, netParams = sim.readCmdLineArgs(simConfigDefault='cfg.py', netParamsDefault='netParams.py')
+simConfig, netParams = sim.readCmdLineArgs(simConfigDefault='cfg.py', netParamsDefault='netParams_AIS.py')
 
 # Create network and run simulation
 sim.createSimulateAnalyze(netParams = netParams, simConfig = simConfig)
