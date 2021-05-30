@@ -22,7 +22,7 @@ cfg.printPopAvgRates = True
 
 # Set recording traces
 #cfg.recordCells = {'all'}
-cfg.recordTraces = {'V_soma':{'sec':'soma','loc':0.5,'var':'v'}}
+cfg.recordTraces = {'V_AIS':{'sec':'AIS','loc':0.5,'var':'v'}}
 cfg.recordStep = 0.1                       
 
 # Save and display data
