@@ -11,7 +11,7 @@ params['cAMP'] = [0.005, 0.01, 0.05, 0.08, 0.1]
 #params['connWeight'] = [0.005, 0.01, 0.025, 0.05]
 
 # create Batch object with parameters to modify, and specifying files to use
-b = Batch(params=params, cfgFile='cfg.py', netParamsFile='netParams.py',)
+b = Batch(params=params, cfgFile='cfg.py', netParamsFile='netParams_AIS.py',)
 
 # Set output folder, grid method (all param combinations), and run configuration
 b.batchLabel = 'disinhibition'
