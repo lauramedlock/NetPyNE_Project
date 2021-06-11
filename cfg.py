@@ -33,8 +33,9 @@ cfg.recordStep = 0.1
 #cfg.saveDataInclude = ['simConfig', 'netParams']
 
 #cfg.analysis['plotTraces'] = {'include': [0,25,30,35,38,40], 'timeRange':[0,cfg.duration],'ylim':[-100,50], 'figSize':(10, 8), 'saveFig': True} 
-cfg.analysis['plotTraces'] = {'include':[25], 'saveFig':True}
-cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 'saveFig': True}
+#cfg.analysis['plotTraces'] = {'include':[25], 'saveFig':True}
+#cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 'saveFig': True}
+cfg.analysis['plotSpikeStats'] = {'include':['I_tonic','PROJ'], 'stats':['rate'],'graphType':'boxplot','xlim':[0,55], 'saveFig':True}
 #cfg.analysis['plotSpikeHist'] = {'include':['PAN'],'timeRange':[0,cfg.duration], 'binSize': 100, 'graphType':'bar','saveFig': True}
 #cfg.analysis['plot2Dnet'] = {'showConns': True,'saveFig': True}
 #cfg.analysis['plotShape'] = {'includePre':['PAN'], 'includePost':[],'showSyns': False,'dist': 0.8,'showFig': True}
@@ -43,7 +44,7 @@ cfg.analysis['plotRaster'] = {'timeRange':[0,cfg.duration], 'labels':'overlay', 
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net']
 
 # Variable parameters (used in netParams)
-cfg.spacerL = 5        # spacer length between soma and AIS (inhibitory spinal neuron)
+cfg.spacerL = 50        # spacer length between soma and AIS (inhibitory spinal neuron)
 cfg.connWeight = 0.01  # I to E connectivity weight
 cfg.cAMP = 0.005       #IClamp amplitude in netParams_AIS
 
